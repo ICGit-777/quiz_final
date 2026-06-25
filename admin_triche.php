@@ -43,46 +43,46 @@ try {
 
     <p>Liste des alertes levées en temps réel :</p>
 
-
     <?php if (isset($erreur)): ?>
-        <p style="color: red;"><?= htmlspecialchars($erreur) ?></p>
+        <p class="msg-erreur"><?= htmlspecialchars($erreur) ?></p>
     <?php endif; ?>
 
-<table>
+    <table>
         <thead>
-            <tr>
-
-                <th>ID</th>
-                <th>Étudiant</th>
-                <th>ID Tentative</th>
-                <th>Type d'incident</th>
-                <th>Horodatage</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Étudiant</th>
+            <th>ID Tentative</th>
+            <th>Type d'incident</th>
+            <th>Horodatage</th>
+        </tr>
         </thead>
         <tbody>
-            <?php if (empty($incidents)): ?>
+        <?php if (empty($incidents)): ?>
+            <tr>
+                <td colspan="5" style="text-align: center; color: var(--texte-discret);">
+                    Aucun incident détecté pour le moment. ✨
+                </td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($incidents as $inc): ?>
                 <tr>
-                    <td colspan="5" style="text-align: center; color: #7f8c8d;">Aucun incident détecté pour le moment. ✨</td>
+                    <td>#<?= htmlspecialchars($inc['id']) ?></td>
+                    <td><strong><?= htmlspecialchars($inc['nom']) . ' ' . htmlspecialchars($inc['prenom']) ?></strong></td>
+                    <td>Session n°<?= htmlspecialchars($inc['tentative_id']) ?></td>
+                    <td>
+                        <span class="badge <?= ($inc['type_incident'] === 'changement_onglet') ? 'badge-danger' : 'badge-warning' ?>">
+                            <?= htmlspecialchars(str_replace('_', ' ', $inc['type_incident'])) ?>
+                        </span>
+                    </td>
+                    <td><?= htmlspecialchars($inc['date_incident']) ?></td>
                 </tr>
-            <?php else: ?>
-                <?php foreach ($incidents as $inc): ?>
-                    <tr>
-                        <td>#<?= htmlspecialchars($inc['id']) ?></td>
-                        <td><strong><?= htmlspecialchars($inc['nom']) . " " . htmlspecialchars($inc['prenom']) ?></strong></td>
-                        <td>Session n°<?= htmlspecialchars($inc['tentative_id']) ?></td>
-                        <td>
-                            <span class="badge <?= ($inc['type_incident'] === 'changement_onglet') ? 'badge-danger' : 'badge-warning' ?>">
-                                <?= htmlspecialchars(str_replace('_', ' ', $inc['type_incident'])) ?>
-                            </span>
-                        </td>
-                        <td><?= htmlspecialchars($inc['date_incident']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
         </tbody>
-</table>
-
+    </table>
 </main>
+
 </body>
 </html>
 
