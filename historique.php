@@ -38,12 +38,31 @@ if (!empty($tentatives)) {
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body { font-family: sans-serif; padding: 20px; }
+
+        .top-right {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+        }
+        .top-right a {
+            color: #0645ad;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .top-right a:hover {
+            text-decoration: underline;
+        }
+
         .table-historique { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .table-historique th, .table-historique td { border: 1px solid #aaa; padding: 10px; }
         .moyenne-bloc { padding: 15px; background: #eef; margin-bottom: 20px; font-size: 1.1rem; }
     </style>
 </head>
 <body>
+
+    <div class="top-right">
+        <a href="deconnexion.php">Déconnexion</a>
+    </div>
 
 <main>
     <h1>Mon historique de quiz</h1>
