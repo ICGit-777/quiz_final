@@ -1,0 +1,677 @@
+/* =========================================================
+   QCM Anti-Triche — Feuille de style commune
+   Palette : bleu nuit (#1B2A4A) / bleu clair (#3D6FE0) / vert succès (#1E9E6B)
+             rouge alerte (#D64545) / fond gris doux (#F4F6FA)
+   Pages couvertes : connexion, inscription, quiz, résultat,
+                     historique, admin_users, admin_questions,
+                     admin_parametres, admin_triche
+   ========================================================= */
+
+/* ---- Variables ---- */
+:root {
+  --bleu-nuit:        #1B2A4A;
+  --bleu-clair:       #3D6FE0;
+  --bleu-clair-hover: #2E5BC4;
+  --vert-succes:      #1E9E6B;
+  --rouge-alerte:     #D64545;
+  --jaune-warning:    #E8A33D;
+  --fond:             #F4F6FA;
+  --fond-carte:       #FFFFFF;
+  --texte:            #232A3B;
+  --texte-discret:    #6B7385;
+  --bordure:          #E1E5EE;
+  --ombre:            0 2px 8px rgba(27, 42, 74, 0.08);
+}
+
+/* ---- Reset de base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+/* Conteneur principal (utilisé partout via <main>) */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+}
+
+/* Centrage des pages auth (connexion, inscription) */
+.page-auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-auth .auth-card {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 12px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--ombre);
+}
+
+.page-auth .auth-card h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 28px;
+  font-size: 1.6rem;
+}
+
+.page-auth .auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--texte-discret);
+}
+
+/* =========================================================
+   TYPOGRAPHIE
+   ========================================================= */
+
+h1 {
+  color: var(--bleu-nuit);
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--bleu-nuit);
+  font-size: 1.25rem;
+  margin: 32px 0 12px;
+  font-weight: 600;
+}
+
+h3 {
+  color: var(--bleu-nuit);
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--bordure);
+  margin: 20px 0;
+}
+
+a {
+  color: var(--bleu-clair);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   NAVIGATION ADMIN
+   ========================================================= */
+
+nav {
+  background: var(--bleu-nuit);
+  padding: 14px 24px;
+  margin: -36px -24px 36px;   /* compense le padding de <main> */
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  align-items: center;
+}
+
+nav a {
+  color: #BFD0FF;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+
+nav a:hover {
+  color: #FFFFFF;
+  background: rgba(255,255,255,0.12);
+  text-decoration: none;
+}
+
+/* Séparateur textuel " | " rendu discret */
+nav span.sep {
+  color: rgba(255,255,255,0.25);
+  user-select: none;
+}
+
+/* =========================================================
+   MESSAGES FLASH
+   ========================================================= */
+
+.msg-succes,
+p[style*="color:green"],
+p[style*="color: green"] {
+  background: #E6F7EF !important;
+  color: var(--vert-succes) !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  border: 1px solid #BCE8D4 !important;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.msg-erreur,
+p[style*="color:red"],
+p[style*="color: red"] {
+  background: #FCEAEA !important;
+  color: var(--rouge-alerte) !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  border: 1px solid #F4C2C2 !important;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   FORMULAIRES
+   ========================================================= */
+
+form {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--ombre);
+}
+
+/* Exception : formulaires inline dans les tableaux */
+table form {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: var(--texte);
+  font-size: 0.97rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 13px;
+  border: 1.5px solid var(--bordure);
+  border-radius: 7px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--fond);
+  color: var(--texte);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--bleu-clair);
+  background: var(--fond-carte);
+  box-shadow: 0 0 0 3px rgba(61, 111, 224, 0.15);
+}
+
+/* Bouton principal */
+button,
+input[type="submit"] {
+  display: inline-block;
+  background: var(--bleu-clair);
+  color: #fff;
+  border: none;
+  padding: 11px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: var(--bleu-clair-hover);
+}
+
+button:active,
+input[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+/* Bouton de suppression (danger) */
+button.btn-supprimer,
+.btn-danger {
+  background: transparent;
+  color: var(--rouge-alerte);
+  border: 1.5px solid var(--rouge-alerte);
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+button.btn-supprimer:hover,
+.btn-danger:hover {
+  background: var(--rouge-alerte);
+  color: #fff;
+}
+
+/* =========================================================
+   TABLEAUX
+   ========================================================= */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fond-carte);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--ombre);
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--bordure);
+  vertical-align: middle;
+}
+
+th {
+  background: var(--bleu-nuit);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover td {
+  background: #F0F4FF;
+  transition: background 0.12s;
+}
+
+/* =========================================================
+   QUIZ (quiz.php)
+   ========================================================= */
+
+#quizForm {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.question-bloc {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--ombre);
+  transition: border-color 0.15s;
+}
+
+.question-bloc:focus-within {
+  border-color: var(--bleu-clair);
+}
+
+.question-bloc h3 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.question-bloc label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 400;
+  padding: 9px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s;
+  margin-bottom: 4px;
+}
+
+.question-bloc label:hover {
+  background: var(--fond);
+}
+
+.question-bloc input[type="radio"] {
+  width: auto;
+  margin: 2px 0 0;
+  accent-color: var(--bleu-clair);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Minuteur */
+#minuteur {
+  display: inline-block;
+  background: var(--bleu-nuit);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 22px;
+  letter-spacing: 0.04em;
+}
+
+#minuteur.alerte {
+  background: var(--rouge-alerte);
+  animation: clignoter 0.8s step-start infinite;
+}
+
+@keyframes clignoter {
+  50% { opacity: 0.5; }
+}
+
+/* =========================================================
+   RÉSULTATS & HISTORIQUE
+   ========================================================= */
+
+.score-bloc,
+.moyenne-bloc {
+  background: linear-gradient(135deg, var(--bleu-nuit) 0%, var(--bleu-clair) 100%);
+  color: #fff;
+  padding: 22px 28px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+  font-size: 1.05rem;
+  box-shadow: var(--ombre);
+}
+
+.score-bloc p,
+.moyenne-bloc p {
+  margin: 4px 0;
+}
+
+.score-bloc strong,
+.moyenne-bloc strong {
+  font-size: 1.35rem;
+}
+
+/* Lignes colorées dans la table de correction */
+.table-correction tr.correcte td { background: #E8F7EF; }
+.table-correction tr.incorrecte td { background: #FCEAEA; }
+
+/* Compatibilité style inline utilisé dans resultat.php */
+tr[style*="#d4edda"] td { background: #E8F7EF !important; }
+tr[style*="#f8d7da"] td { background: #FCEAEA !important; }
+
+/* =========================================================
+   BADGES (admin_triche.php)
+   ========================================================= */
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.badge-danger {
+  background: #FCEAEA;
+  color: var(--rouge-alerte);
+  border: 1px solid #F4C2C2;
+}
+
+.badge-warning {
+  background: #FDF3E3;
+  color: #B87818;
+  border: 1px solid #F5DDB0;
+}
+
+/* =========================================================
+   LIENS D'ACTION DANS LES TABLEAUX
+   ========================================================= */
+
+.action-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--bleu-clair);
+  color: var(--bleu-clair);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.action-link:hover {
+  background: var(--bleu-clair);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* =========================================================
+   ÉTATS VIDES
+   ========================================================= */
+
+.etat-vide {
+  text-align: center;
+  color: var(--texte-discret);
+  padding: 32px;
+  font-size: 1rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  main {
+    padding: 20px 16px 40px;
+  }
+
+  nav {
+    margin: -20px -16px 24px;
+    padding: 12px 16px;
+  }
+
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; }
+
+  form {
+    padding: 20px 16px;
+  }
+
+  .page-auth .auth-card {
+    padding: 28px 20px;
+  }
+
+  table, thead, tbody, th, td, tr {
+    font-size: 0.83rem;
+  }
+
+  th, td {
+    padding: 10px 10px;
+  }
+
+  .score-bloc, .moyenne-bloc {
+    padding: 16px 18px;
+  }
+}
+
+/* =========================================================
+   PAGES AUTH (connexion.php / inscription.php)
+   ========================================================= */
+
+.page-auth {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: var(--fond);
+}
+
+.auth-logo {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.auth-card {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 14px;
+  padding: 40px 40px 32px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 4px 24px rgba(27, 42, 74, 0.10);
+}
+
+.auth-card h1 {
+  text-align: center;
+  font-size: 1.55rem;
+  margin: 0 0 28px;
+}
+
+/* Pas de style "form" générique sur les cartes auth */
+.auth-card form {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+.form-row {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--texte-discret);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--bordure);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--fond);
+  color: var(--texte);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--bleu-clair);
+  background: var(--fond-carte);
+  box-shadow: 0 0 0 3px rgba(61, 111, 224, 0.15);
+}
+
+.btn-auth {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  background: var(--bleu-clair);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn-auth:hover { background: var(--bleu-clair-hover); }
+.btn-auth:active { transform: scale(0.98); }
+
+.auth-footer {
+  text-align: center;
+  margin: 22px 0 0;
+  font-size: 0.93rem;
+  color: var(--texte-discret);
+}
+
+.msg-succes {
+  background: #E6F7EF;
+  color: var(--vert-succes);
+  border: 1px solid #BCE8D4;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.msg-erreur {
+  background: #FCEAEA;
+  color: var(--rouge-alerte);
+  border: 1px solid #F4C2C2;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 28px 20px 24px;
+  }
+}
