@@ -7,7 +7,7 @@
  */
 
 $host   = 'localhost';
-$dbname = 'quiz_app';
+$dbname = 'qcm_app';
 $user   = 'root';
 $pass   = 'root'; // mot de passe par défaut sur MAMP
 $port   = '3306'; // MAMP utilise souvent le port 8889 au lieu de 3306 par défaut !

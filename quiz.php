@@ -40,7 +40,6 @@ unset($stmtQ);
 
 // -------------------------------------------------------
 // Durée du QCM configurée par l'admin (table parametres)
-// Fallback à 10 minutes si la table n'existe pas (ou si erreur SQL)
 // -------------------------------------------------------
 $duree_minutes = 10;
 try {
@@ -61,10 +60,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Quiz en cours</title>
-    <style>
-        body { font-family: sans-serif; padding: 30px; background: #fafafa; }
-        .question-bloc { margin-bottom: 25px; padding: 15px; background: #fff; border: 1px solid #eee; border-radius: 5px; }
-    </style>
+    <link rel="stylesheet" href="assets/css/feuille_style.css">
 </head>
 <body>
 
@@ -123,4 +119,3 @@ try {
 <script src="assets/js/anticheat.js"></script>
 </body>
 </html>
-
