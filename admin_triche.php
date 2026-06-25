@@ -27,7 +27,7 @@ try {
 <body>
 
 <main>
-    <h1>🚨 Journal de Surveillance Anti-Triche</h1>
+    <h1> Journal de Surveillance Anti-Triche</h1>
 
     <nav>
         <a href="admin_users.php">Utilisateurs</a>
@@ -61,7 +61,7 @@ try {
         <?php if (empty($incidents)): ?>
             <tr>
                 <td colspan="5" style="text-align: center; color: var(--texte-discret);">
-                    Aucun incident détecté pour le moment. ✨
+                    Aucun incident détecté pour le moment. 
                 </td>
             </tr>
         <?php else: ?>
