@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             $stmt->execute([$utilisateur['id'], $_SERVER['REMOTE_ADDR'] ?? null]);
 
-            header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin_users.php' : 'quiz.php'));
+            header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin_users.php' : 'dashboard.php'));
             exit;
         } else {
             $erreur = "Email ou mot de passe incorrect.";

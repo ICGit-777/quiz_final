@@ -26,7 +26,7 @@ $duree_actuelle = $parametres['duree_qcm_minutes'] ?? 10;
 <head>
     <meta charset="UTF-8">
     <title>Administration - Paramètres</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="feuille_styles.css">
 </head>
 <body>
 

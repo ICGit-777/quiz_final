@@ -4,12 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tentativeId = quizForm.getAttribute("data-tentative-id");
     
-    // CHANGEMENT : Récupération dynamique du temps (fourni par B en minutes, défaut 10)
     const dureeMinutes = quizForm.getAttribute("data-duree-minutes") ? parseInt(quizForm.getAttribute("data-duree-minutes")) : 10;
     let tempsRestant = dureeMinutes * 60; 
 
     let countSorties = 0;
     const maxSortiesAutorisees = 1;
+
+    // Flag : true quand le timer arrive à 0 et soumet le form
+    // → dans ce cas, beforeunload NE doit PAS marquer abandon
+    let soumisParTimer = false;
 
     // Bannière d'alerte
     const alertBanner = document.createElement("div");
@@ -33,11 +36,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (tempsRestant <= 0) {
             clearInterval(intervalMinuteur);
+            soumisParTimer = true; // ← empêche beforeunload de marquer abandon
             declarerIncident('temps_depasse');
             alert("Temps écoulé ! Votre quiz va être soumis automatiquement.");
-            quizForm.submit();
+            quizForm.submit(); // → valider_reponse.php met statut = 'termine'
         }
     }, 1000);
+
+    // -------------------------------------------------------
+    // Fermeture onglet / navigateur → abandon
+    // -------------------------------------------------------
+    window.addEventListener("beforeunload", () => {
+        // Si le form a été soumis normalement (timer ou bouton), on ne fait rien
+        if (soumisParTimer) return;
+
+        // sendBeacon garantit l'envoi même si la page se ferme
+        const payload = JSON.stringify({ tentative_id: parseInt(tentativeId, 10) });
+        const blob    = new Blob([payload], { type: 'application/json' });
+        navigator.sendBeacon('enregistrer_incident.php', blob);
+    });
+
+    // Quand l'utilisateur clique "Valider le quiz" manuellement,
+    // on désactive aussi l'abandon beforeunload
+    quizForm.addEventListener("submit", () => {
+        soumisParTimer = true;
+    });
 
     // API Fullscreen
     const activerPleinEcran = () => {
@@ -84,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function remonterAbandonEnBase() {
         clearInterval(intervalMinuteur);
+        soumisParTimer = true; // empêche beforeunload de doubler l'appel
         const formData = new FormData();
         formData.append("tentative_id", tentativeId);
         formData.append("action", "invalider_tentative");
